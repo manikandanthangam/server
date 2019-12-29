@@ -7,4 +7,6 @@ router.get('/', employeeController.getEmployee);
 
 router.post('/', employeeController.createEmployee);
 
+router.get('/bulkInsert', employeeController.bulkInsert);
+
 module.exports = router;
