@@ -2880,7 +2880,7 @@ exports.getEmployee1 = function (req, res, next) {
     // res.json('test');
 }
 
-exports.createEmployee = function (req, res, next) {
+exports.createEmployee1 = function (req, res, next) {
     res.json({ 'hi': 'hello1' });
 }
 
