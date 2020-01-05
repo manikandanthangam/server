@@ -25,6 +25,14 @@ exports.createComment = function (req, res, next) {
     );
 }
 
+exports.updateComment = (req,res,next) => {
+    res.json({status:"success", data:req.body});
+}
+
+exports.deleteComment = (req, res, next) => {
+    res.json({status:"success", id:req.params.id});
+}
+
 exports.bulkInsert = function (req, res, next) {
     let CommentsArray = [{
         "postId": 1,

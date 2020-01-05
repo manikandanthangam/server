@@ -9,4 +9,8 @@ router.post('/', employeeController.createEmployee);
 
 router.get('/bulkInsert', employeeController.bulkInsert);
 
+router.put('/update', employeeController.updateEmployee);
+
+router.delete('/delete/:id', employeeController.deleteEmployee);
+
 module.exports = router;
