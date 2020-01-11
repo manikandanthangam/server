@@ -6,7 +6,7 @@ router.get('/get', CommentsController.getComments);
 
 router.post('/create', CommentsController.createComment);
 
-router.get('/bulkInsert', CommentsController.bulkInsert);
+router.post('/bulkInsert', CommentsController.bulkInsert);
 
 router.put('/update', CommentsController.updateComment);
 
