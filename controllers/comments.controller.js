@@ -12,6 +12,19 @@ exports.getComments = function (req, res, next) {
   );
 }
 
+exports.getOneComment = function(req, res, next) {
+  Comments.findOne({_id:req.params.id},
+    (error, data) => {
+      if(error){
+        res.json({ error:error, data: [] });
+      } else {
+        res.json({ error:null, data:data });
+      }
+    }
+
+  );
+}
+
 exports.createComment = function (req, res, next) {
   let SaveComment = new Comments(req.body);
   SaveComment.save(
@@ -26,11 +39,30 @@ exports.createComment = function (req, res, next) {
 }
 
 exports.updateComment = (req, res, next) => {
-  res.json({ status: "success", data: req.body });
+  // console.log(req.body);
+  // res.json({ status: "success", data: req.body.id });
+  Comments.findByIdAndUpdate(req.body._id, req.body,
+    (error, data) => {
+      if (error) {
+        res.json({ error: error, data: [] });
+      } else {
+        res.json({ error: error, data: data });
+      }
+    }
+  );
 }
 
 exports.deleteComment = (req, res, next) => {
-  res.json({ status: "success", id: req.params.id });
+  // res.json({ status: "success", id: req.params.id });
+  Comments.deleteOne({_id:req.params.id},
+  (error, data) => {
+    if(error){
+      res.json({ error:error, data:[] });
+    } else {
+      res.json({ error: null, data: data });
+    }
+  }
+  );
 }
 
 exports.bulkInsert = function (req, res, next) {

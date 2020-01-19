@@ -4,6 +4,8 @@ const CommentsController = require('../controllers/comments.controller');
 
 router.get('/get', CommentsController.getComments);
 
+router.get('/getone/:id', CommentsController.getOneComment);
+
 router.post('/create', CommentsController.createComment);
 
 router.post('/bulkInsert', CommentsController.bulkInsert);
