@@ -5,6 +5,8 @@ const employeeController = require('../controllers/employee.controller');
 /* GET users listing. */
 router.get('/', employeeController.getEmployee);
 
+router.get("/getone/:id", employeeController.getOneEmployee);
+
 router.post('/', employeeController.createEmployee);
 
 router.get('/bulkInsert', employeeController.bulkInsert);

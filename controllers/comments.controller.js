@@ -21,7 +21,6 @@ exports.getOneComment = function(req, res, next) {
         res.json({ error:null, data:data });
       }
     }
-
   );
 }
 

@@ -9,6 +9,18 @@ exports.getEmployee = function (req, res, next) {
     );
 }
 
+exports.getOneEmployee = function (req, res, next) {
+    Employee.findOne({ _id: req.params.id },
+        (error, data) => {
+            if (error) {
+                res.json({ error: error, data: [] });
+            } else {
+                res.json({ error: null, data: data });
+            }
+        }
+    );
+}
+
 exports.createEmployee = function (req, res, next) {
     let newEmployee = new Employee(req.body);
     newEmployee.save(
@@ -35,17 +47,30 @@ saveEmployee = (employee) => {
 
 }
 
-exports.updateEmployee = (req,res,next) => {
-    // console.log(req);
-    res.json({"status":"success", "data":req.body});
-    // res.json(req);
+exports.updateEmployee = (req, res, next) => {
+    // res.json({"status":"success", "data":req.body});
+    Employee.findByIdAndUpdate(req.body._id, req.body,
+        (error, data) => {
+            if (error) {
+                res.json({ error: error, data: [] });
+            } else {
+                res.json({ error: null, data: data });
+            }
+        }
+    );
 }
 
-exports.deleteEmployee = (req,res,next) =>{
-    console.log(req.body);
-    console.log(req.params);
-
-    res.json({"status":"success", "id":req.params.id});
+exports.deleteEmployee = (req, res, next) => {
+    // res.json({"status":"success", "id":req.params.id});
+    Employee.deleteOne({ _id: req.params.id },
+        (error, data) => {
+            if (error) {
+                res.json({ error: error, data: [] });
+            } else {
+                res.json({ error: null, data: data });
+            }
+        }
+    );
 }
 
 exports.bulkInsert = function (req, res, next) {
