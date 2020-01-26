@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 const userController = require('../controllers/user.controller')
 /* GET users listing. */
-router.get('/', userController.getUser);
+router.post('/checkexist', userController.findUser);
 
-router.post('/', userController.createUser);
+router.post('/create', userController.createUser);
 
 module.exports = router;
