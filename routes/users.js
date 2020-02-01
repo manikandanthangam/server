@@ -6,4 +6,6 @@ router.post('/checkexist', userController.findUser);
 
 router.post('/create', userController.createUser);
 
+router.post('/encode', userController.encodePassword);
+
 module.exports = router;
