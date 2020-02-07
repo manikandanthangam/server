@@ -1,7 +1,9 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+// var cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
+
 var logger = require('morgan');
 var cors = require('cors');
 const mongoose = require('mongoose');
@@ -12,6 +14,8 @@ var usersRouter = require('./routes/users');
 var employeeRouter = require('./routes/employee');
 var studentRouter = require('./routes/student');
 var commentsRouter = require('./routes/comments');
+const withAuth = require('./middleware');
+
 var app = express();
 app.use(cors());
 
@@ -38,12 +42,13 @@ mongoose.connection.on('error', (error) => {
   }
 });
 
+// app.use(express.cookieParser());
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/employee', employeeRouter);
-app.use('/student', studentRouter);
-app.use('/comments', commentsRouter);
+app.use('/employee', withAuth, employeeRouter);
+app.use('/student', withAuth, studentRouter);
+app.use('/comments', withAuth, commentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

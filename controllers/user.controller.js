@@ -1,5 +1,6 @@
 const User = require('../models/user.model');
 var bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 exports.findUser = function (req, res, next) {
     try {
@@ -22,7 +23,21 @@ exports.findUser = function (req, res, next) {
                             if (booleanData) {
                                 console.log("success");
                                 outputData = data;
-                                res.json({ 'data': booleanData, 'Msg': 'Successfullly logged in', 'Status': 200 });
+                                const secret = 'mysecretsshhh';
+
+                                // Issue token
+                                let email = data.email;
+                                const payload = { email };
+                                const token = jwt.sign(payload, secret, {
+                                    expiresIn: '1h'
+                                });
+                                console.log(token);
+                                console.log(req.cookies.token);
+                                console.log('token');
+                                // res.cookie('token', token, { httpOnly: true }).sendStatus(200);
+
+                                // res.cookie('token', token, { maxAge: 900000, httpOnly: true }).sendStatus(200);
+                                res.json({ 'token': token, 'data': booleanData, 'Msg': 'Successfullly logged in', 'Status': 200 });
 
                             } else {
                                 console.log("failed");
